@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.Image;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.rdr.rodrigocorvera.tarea1labo.Planet;
 import com.rdr.rodrigocorvera.tarea1labo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,17 +25,26 @@ import java.util.List;
 public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHolder> {
 
     Context context;
-    List<Planet> lstData;
+    List<Planet> lstData = new ArrayList<Planet>();
 
     public PlanetAdapter(Context context, List<Planet> lstData) {
         this.context = context;
-        lstData = lstData;
+        this.lstData = lstData;
     }
 
     @Override
     public PlanetAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.card_view,parent,false);
         final MyViewHolder myviewHolder= new MyViewHolder(v);
+        final LinearLayout linearLayout = v.findViewById(R.id.content_box);
+
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Nombre: ", lstData.get(myviewHolder.getAdapterPosition()).getName());
+            }
+        });
+
         return myviewHolder;
     }
 
@@ -42,7 +53,7 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.name.setText(lstData.get(position).getName());
         holder.desc.setText(lstData.get(position).getDescription());
-        holder.image.setImageResource(lstData.get(position).getImage());
+        //holder.image.setImageResource(lstData.get(position).getImage());
     }
 
 
@@ -51,7 +62,7 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
         return lstData.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private LinearLayout item_contact;
         private TextView name;
@@ -68,7 +79,10 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
             favorite = itemView.findViewById(R.id.favorite_image);
         }
 
-
+        @Override
+        public void onClick(View view) {
+            Log.d("Nombre:", name.getText().toString());
+        }
     }
 
 
