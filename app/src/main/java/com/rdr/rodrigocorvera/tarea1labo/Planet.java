@@ -12,13 +12,31 @@ public class Planet {
     String name;
     String description;
     ImageView image;
+    int favPos;
+    boolean favorite;
 
-    public Planet (String name, String description, ImageView image) {
+    public Planet (String name, String description, ImageView image, boolean favorite, int originalPos) {
         this.name = name;
         this.description = description;
         this.image = image;
+        this.favorite = favorite;
     }
 
+    public Planet (String name, String description, ImageView image, boolean favorite, int originalPos, int favPos) {
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.favorite = favorite;
+        this.favPos = favPos;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
 
     public String getName() {
         return name;
