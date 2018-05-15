@@ -38,7 +38,6 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
     public PlanetAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.card_view,parent,false);
         final MyViewHolder myviewHolder= new MyViewHolder(v);
-
         return myviewHolder;
     }
 
@@ -47,6 +46,13 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.name.setText(lstData.get(position).getName());
         holder.desc.setText(lstData.get(position).getDescription());
+
+        if (lstData.get(position).isFavorite()) {
+            holder.favorite.setImageResource(R.drawable.ic_star_yellow);
+        }else {
+            holder.favorite.setImageResource(R.drawable.ic_star_border_black);
+        }
+
         holder.favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +64,7 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
                 }else {
                     holder.favorite.setImageResource(R.drawable.ic_star_border_black);
                     lstData.get(holder.getAdapterPosition()).setFavorite(false);
+                    PlanetFragment.sm.sendData("","",0);
                 }
             }
         });

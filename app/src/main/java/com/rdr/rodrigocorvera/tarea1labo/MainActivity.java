@@ -17,7 +17,7 @@ import com.rdr.rodrigocorvera.tarea1labo.Fragments.PlanetFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements PlanetFragment.sendMessage{
+public class MainActivity extends AppCompatActivity implements PlanetFragment.sendMessage, FavoriteFragment.sendMessage{
 
     public static List<Planet> lstPlanets;
 
@@ -26,11 +26,12 @@ public class MainActivity extends AppCompatActivity implements PlanetFragment.se
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TabLayout tab = findViewById(R.id.tabLayout_id);
-        ViewPager pages = findViewById(R.id.viewPager_id);
+         TabLayout tab = findViewById(R.id.tabLayout_id);
+         ViewPager pages = findViewById(R.id.viewPager_id);
          fillPlanets();
          ViewPagerAdapter planetAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-         //planetAdapter.AddFragment(new PlanetFragment(),"Planetas");
+
+         planetAdapter.AddFragment(new PlanetFragment(),"Planetas");
          planetAdapter.AddFragment(new FavoriteFragment(), "Favoritos");
          pages.setAdapter(planetAdapter);
 
@@ -44,6 +45,13 @@ public class MainActivity extends AppCompatActivity implements PlanetFragment.se
     public void sendData(String name, String number, int option) {
         String tag = "android:switcher:" + R.id.viewPager_id + ":" + 1;
         FavoriteFragment f = (FavoriteFragment) getSupportFragmentManager().findFragmentByTag(tag);
+        f.displayReceivedData(name, number, option);
+    }
+
+    @Override
+    public void sendDataFromFavorite(String name, String number, int option) {
+        String tag = "android:switcher:" + R.id.viewPager_id + ":" + 0;
+        PlanetFragment f = (PlanetFragment) getSupportFragmentManager().findFragmentByTag(tag);
         f.displayReceivedData(name, number, option);
     }
 

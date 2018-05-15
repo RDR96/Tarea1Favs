@@ -12,6 +12,7 @@ public class Planet {
     String name;
     String description;
     ImageView image;
+    int originalPosition;
     int favPos;
     boolean favorite;
 
@@ -20,6 +21,15 @@ public class Planet {
         this.description = description;
         this.image = image;
         this.favorite = favorite;
+        this.originalPosition = originalPos;
+    }
+
+    public int getOriginalPosition() {
+        return originalPosition;
+    }
+
+    public void setOriginalPosition(int originalPosition) {
+        this.originalPosition = originalPosition;
     }
 
     public Planet (String name, String description, ImageView image, boolean favorite, int originalPos, int favPos) {
@@ -27,6 +37,15 @@ public class Planet {
         this.description = description;
         this.image = image;
         this.favorite = favorite;
+        this.originalPosition = originalPos;
+        this.favPos = favPos;
+    }
+
+    public int getFavPos() {
+        return favPos;
+    }
+
+    public void setFavPos(int favPos) {
         this.favPos = favPos;
     }
 

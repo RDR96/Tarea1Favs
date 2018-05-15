@@ -12,9 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rdr.rodrigocorvera.tarea1labo.Adapters.FavoriteAdapter;
 import com.rdr.rodrigocorvera.tarea1labo.Adapters.PlanetAdapter;
 import com.rdr.rodrigocorvera.tarea1labo.MainActivity;
+import com.rdr.rodrigocorvera.tarea1labo.Planet;
 import com.rdr.rodrigocorvera.tarea1labo.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by Rodrigo Corvera on 12/5/2018.
@@ -32,7 +36,7 @@ public class PlanetFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.planet_activity,container,false);
         recyclerView  = v.findViewById(R.id.planet_recycleView);
         PlanetAdapter planetAdapter = new PlanetAdapter(getContext(), MainActivity.lstPlanets);
@@ -49,6 +53,13 @@ public class PlanetFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void displayReceivedData(String name, String number, int option) {
+        PlanetAdapter planetAdapter = new PlanetAdapter(getContext(), MainActivity.lstPlanets);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        planetAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(planetAdapter);
     }
 
 
